@@ -14,7 +14,6 @@ GLfloat myx = 0.0, myy = 0.0, myz = 0.0, heliRotationTEST = 0.0;
 void helirotation(float*);
 // source(eyeX, eyeY, eyeZ), target(centerX, centerY, centerZ), up(upX, upY, upZ)
 //viewer
-int forward_tilt = 0, left_tilt = 0, right_tilt = 0;
 void moveHeli();
 
 void init() {
@@ -48,7 +47,7 @@ void RenderScene() {
 	gluPerspective(50.0, 1.0, 1.0, 10.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//myx
+	//gluLookAt(Kammeraposition[eyex, eyey, eyez],Blickpunkt [centerx, centery, centerz], Normale der Kamera[upx, upy, upz];
 	gluLookAt(0, 3, -1, myx, myy, myz, 0.0, 10.0, 0.0);
 	glutWireCube(0.2);
 	glRotatef(camereEyeRot, 0.0, 1.0, 0.0);
@@ -57,8 +56,9 @@ void RenderScene() {
 	glPushMatrix();
 	glColor3f(1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
-	glBegin(GL_POLYGON); //GL_QUADS
-	glTexCoord2f(10, 0);
+	glBegin(GL_POLYGON); //Polygon ist sehr langsam GL_QUADS ist schneller
+	glNormal3f(0, 1, 0);
+	glTexCoord2f(10, 0); //set the current texture coordinates
 	glVertex3f(-5, -1, -5.);
 	glTexCoord2f(10, 10);
 	glVertex3f(5, -1, -5.);
@@ -121,7 +121,6 @@ void RenderScene() {
 	glTranslatef(0, 0, 0.2);
 	gluCylinder(gluNewQuadric(), 0.5, 0.0, 0.5, 32, 32);
 	glPopMatrix();
-
 	//HAUS ODER PILZ JE NACHDEM
 
 
@@ -155,37 +154,26 @@ void RenderScene() {
 	glColor4f(0, 0, 0, 0);
 	glEnable(GL_LINE_SMOOTH);
 	glBegin(GL_LINES);
-
 	glVertex3f(0.2f, -0.28f, 0.28f);
 	glVertex3f(0.2f, -0.28f, -0.28f);
-
 	glVertex3f(0.2f, -0.28f, 0.28f);
 	glVertex3f(0.2f, -0.24f, 0.32f);
-
 	glVertex3f(0.2f, -0.28f, -0.28f);
 	glVertex3f(0.2f, -0.24f, -0.32f);
-
 	glVertex3f(0, 0.0f, 0.2f);
 	glVertex3f(0.2f, -0.28f, 0.2f);
-
 	glVertex3f(0, 0.0, -0.2f);
 	glVertex3f(0.2f, -0.28f, -0.2f);
-
 	glVertex3f(-0.2f, -0.28f, 0.28f);
 	glVertex3f(-0.2f, -0.28f, -0.28f);
-
 	glVertex3f(-0.2f, -0.28f, 0.28f);
 	glVertex3f(-0.2f, -0.24f, 0.32f);
-
 	glVertex3f(-0.2f, -0.28f, -0.28f);
 	glVertex3f(-0.2f, -0.24f, -0.32f);
-
 	glVertex3f(0, 0.0, 0.2f);
 	glVertex3f(-0.2f, -0.28f, 0.2f);
-
 	glVertex3f(0, 0.0, -0.2f);
 	glVertex3f(-0.2f, -0.28f, -0.2f);
-
 	glEnd();
 	glPopMatrix();
 	//HELI BEINE
